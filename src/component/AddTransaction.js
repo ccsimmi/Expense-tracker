@@ -1,16 +1,23 @@
 import { useContext, useState } from "react";
 import { Context } from "../store/Context";
+import { v4 as uuidv4 } from "uuid";
 
 const AddTransaction = () => {
   const [text, setText] = useState("");
   const [amount, setAmount] = useState("");
-  let id = 5;
+
+  function generateUUID() {
+    return uuidv4();
+  }
 
   const { addTransaction } = useContext(Context);
 
   function handleAddTransaction(e) {
     e.preventDefault();
-    addTransaction({ id: id + 1, text, amount });
+    if (!text || !amount) {
+      return;
+    }
+    addTransaction({ id: generateUUID(), text, amount });
   }
 
   return (
@@ -25,6 +32,7 @@ const AddTransaction = () => {
               id="cashflow"
               value={text}
               onChange={(e) => setText(e.target.value)}
+              required
             />
           </section>
           <section className="input-div">
@@ -34,29 +42,8 @@ const AddTransaction = () => {
               id="amount"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
+              required
             />
-          </section>
-          <section>
-            <input
-              type="radio"
-              id="income"
-              name="cashflow"
-              value="income"
-              className="radio"
-            />
-            <label className="label" htmlFor="income">
-              Income
-            </label>
-            <input
-              type="radio"
-              id="expense"
-              name="cashflow"
-              value="expense"
-              className="radio"
-            />
-            <label className="label" htmlFor="expense">
-              Expense
-            </label>
           </section>
           <button onClick={handleAddTransaction} className="btn submit">
             Add

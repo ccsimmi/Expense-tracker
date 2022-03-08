@@ -131,3 +131,12 @@ form .input-div {
   margin-top: 0.8em;
   background-color: green;
 }
+
+/* utilities */
+.income {
+  color: green;
+}
+
+.expense {
+  color: red;
+}

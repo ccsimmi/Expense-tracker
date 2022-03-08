@@ -1,7 +1,6 @@
 import { createContext, useReducer } from "react";
 
 const initialState = {
-  balance: 1000,
   transactionList: [{ id: 1, text: "shopping", amount: 200, expense: true }],
 };
 

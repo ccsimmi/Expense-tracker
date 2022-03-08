@@ -7,7 +7,11 @@ const TransactionItem = ({ id, amount, text }) => {
   return (
     <div className="item">
       <p className="item-text">{text}</p>
-      <p className="item-price">£{amount}</p>
+      <div className="item-price">
+        <p className={parseInt(amount) > 0 ? "income" : "expense"}>
+          £{Math.abs(amount)}
+        </p>
+      </div>
       <button onClick={() => deleteTransaction(id)} className="btn">
         Remove
       </button>

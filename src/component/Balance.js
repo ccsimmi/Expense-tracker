@@ -1,8 +1,22 @@
 import { Context } from "../store/Context";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 const Balance = () => {
-  const { balance } = useContext(Context);
+  const [balance, setBalance] = useState();
+  const { transactionList } = useContext(Context);
+
+  useEffect(() => {
+    const incomeAndExpenses = [];
+    transactionList.map((transaction) =>
+      incomeAndExpenses.push(parseInt(transaction.amount))
+    );
+
+    let total = incomeAndExpenses.reduce((prev, current) => {
+      return prev + current;
+    }, 0);
+
+    setBalance(total);
+  }, [transactionList]);
 
   return (
     <div className="balance">
