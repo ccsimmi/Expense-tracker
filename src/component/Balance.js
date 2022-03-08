@@ -20,8 +20,16 @@ const Balance = () => {
 
   return (
     <div className="balance">
-      <span className="currency">£</span>
-      <p className="cash-amount">{balance}</p>
+      <span className="currency margin-right">£</span>
+      <div className="cash-amount">
+        <p
+          className={
+            balance > 0 ? "income" : balance === 0 ? "income" : "expense"
+          }
+        >
+          {balance}
+        </p>
+      </div>
     </div>
   );
 };

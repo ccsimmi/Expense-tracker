@@ -140,3 +140,11 @@ form .input-div {
 .expense {
   color: red;
 }
+
+.neutral {
+  color: blue;
+}
+
+.margin-right {
+  margin-right: 0.6em;
+}
