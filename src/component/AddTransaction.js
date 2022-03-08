@@ -1,4 +1,18 @@
+import { useContext, useState } from "react";
+import { Context } from "../store/Context";
+
 const AddTransaction = () => {
+  const [text, setText] = useState("");
+  const [amount, setAmount] = useState("");
+  let id = 5;
+
+  const { addTransaction } = useContext(Context);
+
+  function handleAddTransaction(e) {
+    e.preventDefault();
+    addTransaction({ id: id + 1, text, amount });
+  }
+
   return (
     <>
       <h2 className="subheading margin-top">Add transaction</h2>
@@ -6,11 +20,21 @@ const AddTransaction = () => {
         <form>
           <section className="input-div">
             <label htmlFor="cashflow">Ingoings / Outgoings</label>
-            <input type="text" id="cashflow" />
+            <input
+              type="text"
+              id="cashflow"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+            />
           </section>
           <section className="input-div">
             <label htmlFor="amount">Amount</label>
-            <input type="number" id="amount" />
+            <input
+              type="number"
+              id="amount"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+            />
           </section>
           <section>
             <input
@@ -34,7 +58,9 @@ const AddTransaction = () => {
               Expense
             </label>
           </section>
-          <button className="btn submit">Add</button>
+          <button onClick={handleAddTransaction} className="btn submit">
+            Add
+          </button>
         </form>
       </div>
     </>
